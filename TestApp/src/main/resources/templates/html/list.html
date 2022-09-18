@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.w3.org/1999/xhtml"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="common-meta">
+    <title>レイアウト</title>
+
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header>
+        <div>
+            <h1 id="logo"></h1>
+        </div>
+        <div class="account">
+            <div th:if="${#authorization.expression('isAuthenticated()')}">
+                <form th:action="@{/user/logout}" method="post">
+					<button type="submit" class="btn btn-success btn-sm shadow-sm">ログアウト</button>
+                </form>
+            </div>
+            <div th:if="${#authorization.expression('!isAuthenticated()')}">
+                <form th:action="@{/login}" method="get">
+                    <button>ログイン</button>
+                </form>
+                <form th:action="@{/signup}" method="get">
+                    <button>サインアップ</button>
+                </form>
+            </div>
+        </div>
+    </header>
+    <div id="content">
+        <main id="main-area" layout:fragment="layoutContent">
+            <p>Default content</p>
+        </main>
+        <div id="side-area">
+            サイドバー
+        </div>
+    </div>
+    <footer>footer</footer>
+</body>
+</html>

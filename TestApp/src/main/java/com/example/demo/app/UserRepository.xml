@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.example.demo.app.UserRepository">
+
+	<insert id="registerUser" parameterType="com.example.demo.app.AuthenticatedUser"
+			useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+	
+		INSERT INTO users (name, password, email)
+		VALUES (#{username}, #{password}, #{email});
+			   
+	]]>
+	</insert>
+	
+	<select id="identifyUser" parameterType="java.lang.String" resultMap="userDetails">
+	<![CDATA[ 
+	
+		SELECT users.id,
+		users.name,
+		users.password,
+		users.email
+		FROM users
+		WHERE users.email = #{email};
+			   
+	]]>
+	</select>
+	<resultMap type="com.example.demo.app.AuthenticatedUser" id="userDetails">
+		<result property="id" column="id"/>
+		<result property="username" column="name"/>
+		<result property="password" column="password"/>
+		<result property="email" column="email"/>
+	</resultMap>
+</mapper>
