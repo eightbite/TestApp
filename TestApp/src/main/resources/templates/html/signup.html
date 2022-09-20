@@ -8,19 +8,19 @@
         <div>
             <h1>ユーザー登録</h1>
         
-            <form method="post" th:action="@{/registration}" action="#" th:object="${userRegistrationForm}" autocomplete="off">
+            <form method="post" th:action="@{/signup}" action="#" th:object="${userRegistrationForm}" autocomplete="off">
         
-                <label for="name">ユーザ名</label>
-                <input id="name" type="name" name="name" th:field="*{name}" autofocus="autofocus" value="" placeholder="ユーザ名を入力してください" autocomplete="off"/>
-                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                <label for="name">ユーザ名</label><br/>
+                <input id="name" type="name" name="name" th:field="*{name}" autofocus="autofocus" value="" placeholder="ユーザ名を入力してください"/><br/>
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div><br/>
 
-                <label for="email">E-mail</label>
-                <input id="email" type="email" name="email" th:field="*{email}" value="" placeholder="E-mailを入力してください" autocomplete="off"/>
-                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                <label for="email">E-mail</label><br/>
+                <input id="email" type="email" name="email" th:field="*{email}" value="" placeholder="E-mailを入力してください"/><br/>
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div><br/>
 
-                <label for="password">パスワード</label>
-                <input id="password" type="password" name="password" th:field="*{password}" value="" placeholder="パスワードを入力してください" autocomplete="off"/>
-                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                <label for="password">パスワード</label><br/>
+                <input id="password" type="password" name="password" th:field="*{password}" value="" placeholder="パスワードを入力してください"/><br/>
+                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div><br/>
 
                 <input type="submit" value="新規登録"/>
 

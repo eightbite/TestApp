@@ -1,20 +1,20 @@
 package com.example.demo.app;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class userRegistrationForm {
 	
-	@NotNull(message = "username is not blank")
-	@Size(min = 1, max = 20, message = "Please input 20characters or less")
+	@NotBlank(message = "username is not blank")
+	@Size(max = 20, message = "Please input 20characters or less")
 	private String name;
 	
-	@NotNull(message = "email is not blank")
+	@NotBlank(message = "email is not blank")
 	@Email(message = "Invalid E-mail Format")
 	private String email;
 	
-	@NotNull(message = "password is not blank")
 	@Size(min = 6, message = "Please input min 6characters")
 	private String password;
 
