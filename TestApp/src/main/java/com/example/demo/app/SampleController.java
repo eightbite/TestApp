@@ -1,5 +1,8 @@
 package com.example.demo.app;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -20,9 +23,16 @@ public class SampleController {
 	@Autowired
 	private UserRegistrationService userRegistrationService;
 	
+	@Autowired
+	private userFindAllService userFindAllService;
+	
 	@GetMapping("/list")
 	public String root(Model model) {
-		model.addAttribute("title", "Test Title");
+		
+		List<AuthenticatedUser> allUser = userFindAllService.userFindAll();
+		
+		model.addAttribute("users", allUser);
+		
 		return "html/list";
 	}
 	
