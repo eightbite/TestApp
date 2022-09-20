@@ -7,8 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -32,21 +32,20 @@ public class SampleController {
     }
 	
 	@GetMapping("/signup")
-	public String signup(Model model, userRegistrationForm userRegistrationForm) {
+	public String signup(Model model) {
 		
 //		BindingResult result = (BindingResult) model.getAttribute("result");
-		
+		model.addAttribute("userRegistrationForm", new userRegistrationForm());
 		return "html/signup";
 	}
 	
-	@PostMapping("/registration")
-	public String registration(@Validated userRegistrationForm userRegistrationForm,
+	@PostMapping("/signup")
+	public String registration(@Validated @ModelAttribute userRegistrationForm userRegistrationForm,
 								BindingResult result,
 								Model model,
 								RedirectAttributes redirectAttributes) {
 		if(result.hasErrors()) {
-			redirectAttributes.addFlashAttribute("result", result);
-			return "redirect:/signup";
+			return "html/signup";
 		}
 		AuthenticatedUser user = new AuthenticatedUser();
 		user.setEmail(userRegistrationForm.getEmail());
@@ -55,6 +54,6 @@ public class SampleController {
 		
 		userRegistrationService.registerUser(user);
 		
-		return "html/login";
+		return "redirect:/login";
 	}
 }
