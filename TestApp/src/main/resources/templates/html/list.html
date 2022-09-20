@@ -12,35 +12,54 @@
 
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
-<body>
-    <header>
+<body style="background-color: rgb(255, 241, 224); margin:0; padding:0;">
+    <header style="display:flex;justify-content: space-between; align-items: center; background-color: rgb(109, 63, 50); height: 15vh;">
         <div>
-            <h1 id="logo"></h1>
+            <h1 id="logo" style="margin-left: 30px; color: white; font-family: Yu Gothic, '游ゴシック', YuGothic, '游ゴシック体';">FirstApp</h1>
         </div>
         <div class="account">
             <div th:if="${#authorization.expression('isAuthenticated()')}">
-                <form th:action="@{/user/logout}" method="post">
-					<button type="submit" class="btn btn-success btn-sm shadow-sm">ログアウト</button>
+                <form th:action="@{/user/logout}" method="post" style="margin: 0 30px 0 10px;">
+					<button type="submit" class="btn btn-success btn-sm shadow-sm" style="border: 2px solid #000; border-radius: 0; background: #fff; padding: 10px;">ログアウト</button>
                 </form>
             </div>
-            <div th:if="${#authorization.expression('!isAuthenticated()')}">
-                <form th:action="@{/login}" method="get">
-                    <button>ログイン</button>
+            <div th:if="${#authorization.expression('!isAuthenticated()')}" style="display:flex; justify-content: space-between;">
+                <form th:action="@{/login}" method="get" style="margin: 0 10px;">
+                    <button style="border: 2px solid #000; border-radius: 0; background: #fff; padding: 10px;">ログイン</button>
                 </form>
-                <form th:action="@{/signup}" method="get">
-                    <button>サインアップ</button>
+                <form th:action="@{/signup}" method="get" style="margin-right: 30px;">
+                    <button style="border: 2px solid #000; border-radius: 0; background: #fff; padding: 10px;">新規登録</button>
                 </form>
             </div>
         </div>
     </header>
     <div id="content">
-        <main id="main-area" layout:fragment="layoutContent">
-            <p>Default content</p>
+        <main id="main-area" layout:fragment="layoutContent" style="min-height: 70vh; ">
+            <table style="border-collapse: collapse; border-spacing: 0; width: auto; margin: auto;">
+                <thead style="display: block; width: auto;">
+                    <tr style="border-bottom: solid 1px #eee; cursor: pointer;">
+                        <th style="text-align: center; padding: 15px 0; background-color: antiquewhite; width: 100px;">id</th>
+                        <th style="text-align: center; padding: 15px 0; background-color: antiquewhite; width: 100px;">編集</th>
+                        <th style="text-align: center; padding: 15px 0; background-color: antiquewhite; width: 100px;">ユーザ名</th>
+                        <th style="text-align: center; padding: 15px 0; background-color: antiquewhite; width: 100px;">email</th>
+                        <th style="text-align: center; padding: 15px 0; background-color: antiquewhite; width: 100px;">password</th>
+                    </tr>
+                </thead>
+                <tbody style="overflow-x: hidden; overflow-y: scroll; height: 64vh; display: block; width: auto;">
+                    <tr th:if="${!#lists.isEmpty(users)}" th:each="user : ${users}" style="border-bottom: solid 1px #eee; cursor: pointer;">
+                        <td th:text="${user.getId}" style="text-align: center; padding: 15px 0; width: 100px;"></td>
+                        <td style="text-align: center; padding: 15px 0; width: 100px;"><div style="border: thick groove silver; padding: 3px -10px; margin: -2px 15px;">edit</div></td>
+                        <td th:text="${user.getUsername}" style="text-align: center; padding: 15px 0; width: 100px;"></td>
+                        <td th:text="${user.getEmail}" style="text-align: center; padding: 15px 0; width: 100px;"></td>
+                        <td style="text-align: center; padding: 15px 0; width: 100px;">******</td>
+                    </tr>
+                </tbody>
+            </table>
+            
         </main>
-        <div id="side-area">
-            サイドバー
-        </div>
     </div>
-    <footer>footer</footer>
+    <footer style="height: 15vh;">
+        <div style="background-color: rgb(109, 63, 50); padding: 5px 10px; color: white; display:flex; justify-content: center; font-size: 4px;">@2022 DESIGN BY 8BITE : FIRST APP</div>
+    </footer>
 </body>
 </html>

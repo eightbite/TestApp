@@ -55,8 +55,6 @@ public class SecurityConfig {
 					.permitAll()
 				.mvcMatchers("/registration")				
 					.permitAll()
-					.mvcMatchers("/signup_error")				
-					.permitAll()
 //				.mvcMatchers("/general")
 //					.hasRole("GENERAL")			// "/general"はROLE_GENERALのみアクセス可能
 //				.mvcMatchers("/admin")
